@@ -21,22 +21,22 @@ labels = []
 # Load and preprocess the dataset
 for label, cls in enumerate(classes):
     class_dir = os.path.join(dataset_dir, cls)
-    
+
     # Check if it's a directory
     if os.path.isdir(class_dir):
         print(f"Loading class: {cls} from {class_dir}")
-        
+
         # Initialize a counter to limit the number of images
         image_count = 0
-        
+
         # Iterate through images directly in the class folder
         for img_name in os.listdir(class_dir):
             img_path = os.path.join(class_dir, img_name)
-            
+
             # Check if file is an image and limit to 50 images
             if img_name.lower().endswith(('png', 'jpg', 'jpeg')) and image_count < 50:
                 img = cv2.imread(img_path)
-                
+
                 # Check if the image was successfully loaded
                 if img is not None:
                     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)  # Convert to RGB
@@ -93,7 +93,7 @@ cap = cv2.VideoCapture(0)  # 0 for default webcam
 while True:
     # Capture a frame from the webcam
     ret, frame = cap.read()
-    
+
     if not ret:
         print("Failed to capture image")
         break
@@ -103,18 +103,18 @@ while True:
     img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))  # Resize image
     img = np.expand_dims(img, axis=0)  # Add batch dimension
     img = img / 255.0  # Normalize pixel values
-    
+
     # Predict the class of the image
     prediction = model.predict(img)
     predicted_class = np.argmax(prediction, axis=1)
     predicted_label = classes[predicted_class[0]]  # Convert to class label
-    
+
     # Display the predicted letter on the frame
     cv2.putText(frame, f'Predicted: {predicted_label}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    
+
     # Show the frame
     cv2.imshow("ASL Letter Detection", frame)
-    
+
     # Exit the loop when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
