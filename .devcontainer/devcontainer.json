@@ -1,22 +1,17 @@
 {
-	"image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
-	"mounts": [
-	  "source=${localWorkspaceFolder},target=/workspace,type=bind"
-	],
-	"postCreateCommand": [
-	  "sudo apt update && sudo apt install -y libopencv-dev python3-pip",
-	  "pip3 install --upgrade pip",
-	  "pip3 install opencv-python tensorflow numpy"
-	],
-	"portsAttributes": {
-	  "3000": {
-		"label": "ASL Hand Sign Recognition"
-	  }
-	},
-	"vscode": {
-	  "extensions": [
-		"ms-python.python",
-		"ms-toolsai.jupyter"
-	  ]
-	}
+  "image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu",
+  "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
+  "postCreateCommand": [
+    "sudo apt update && sudo apt install -y libopencv-dev python3-pip",
+    "pip3 install --upgrade pip",
+    "pip3 install opencv-python tensorflow numpy"
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "ASL Hand Sign Recognition"
+    }
+  },
+  "vscode": {
+    "extensions": ["ms-python.python", "ms-toolsai.jupyter"]
   }
+}
