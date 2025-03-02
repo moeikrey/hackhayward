@@ -8,7 +8,7 @@ import cv2
 from sklearn.model_selection import train_test_split
 
 # Dataset directory (update this path to your dataset)
-dataset_dir = "C:/Users/necha/hackhayward/dataSet/testingData"
+dataset_dir = "./dataSet/testingData"
 IMG_SIZE = 64  # Size expected by the model
 
 # List of class labels (e.g., '0', 'A' to 'Z')
