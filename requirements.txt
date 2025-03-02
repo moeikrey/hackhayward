@@ -1,3 +1,7 @@
 groq
 streamlit
 python-dotenv
+tensorflow
+numpy
+opencv-python
+scikit-learn
