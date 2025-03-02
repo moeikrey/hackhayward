@@ -3,6 +3,8 @@ Project by Andreas Sotiras, Jonathan Cornejo, Nechar KC, Luan Luc
 
 This project is a hackathon project that aims to create a sign language interpreter trained off of images of the letters for ASL.
 
+![UI](https://media.discordapp.net/attachments/1345466137231622148/1345650300232663081/image.png?ex=67c55200&is=67c40080&hm=8765feb9e1e93303561b0a186da9580713dd77fdc3d3aee7bff15c8f2e4a4ee5&=&format=webp&quality=lossless&width=2314&height=1024)
+
 ## Example Images
 Below are some example images used for training the model. These images are located in the `examples` folder.
 
