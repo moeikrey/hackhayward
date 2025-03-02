@@ -162,10 +162,10 @@ while True:
     # Show the frame
     cv2.imshow("ASL Letter Detection", frame)
 
-    # Exit on 'q' key press
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    # # Exit on 'q' key press
+    # if cv2.waitKey(10) & 0xFF == ord('q'):
 
-        # Exit the loop when 'q' is pressed
+    # Exit the loop when 'q' is pressed
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
