@@ -41,8 +41,9 @@ This project uses a Convolutional Neural Network (CNN) to recognize ASL letters 
 
 5. **Interpreting ASL Letters**: Place your hand within the green square on the webcam feed. The model will predict the ASL letter and display it on the screen. If the letter remains the same for 3 seconds, it will be confirmed.
 
-### Example Output
-![Example Output](examples/B_example.png)
+### State Diagrams for ASL Buddy Prediction and ASL Trainer
+![ASL Trainer](examples/ASLTrainerDiagram.png)
+![ASL Buddy Prediction](examples/ASLPredictionDiagram.png)
 
 ## Contributors
 - Andreas Sotiras
