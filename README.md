@@ -10,7 +10,10 @@ Below are some example images used for training the model. These images are loca
 ![Example 1](examples/ASLtrainer2.png)
 
 ### Example 2
-![Example 2](examples/B_example.png)
+Below are some examples of PREDICTIVE ASL BUDDY.
+![Example 2](examples/ASL_PREDICTION1.png)
+![Example 2.1](examples/ASL_PREDICTION2.png)
+![Example 2.2](exampples/ASL_PREDICTION3.png)
 
 ### Example 3
 ![Example 3](examples/C_example.png)
