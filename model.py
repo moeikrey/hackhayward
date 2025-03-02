@@ -27,6 +27,12 @@ for label, cls in enumerate(classes):
             img_path = os.path.join(class_dir, img_name)
             if img_name.lower().endswith(('png', 'jpg', 'jpeg')) and image_count < 500:
                 img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+
+            # Check if file is an image and limit to 50 images
+            if img_name.lower().endswith(('png', 'jpg', 'jpeg')) and image_count < 50:
+                img = cv2.imread(img_path)
+
+                # Check if the image was successfully loaded
                 if img is not None:
                     img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))
                     img = np.expand_dims(img, axis=-1)  # Add channel dimension
@@ -78,18 +84,22 @@ if not cap.isOpened():
 roi_size = 150
 
 # Preprocessing function for the ROI
+
+
 def preprocess_roi(roi):
     """Preprocess ROI to match training data: grayscale, thresholding for white background with black hand outlines."""
     gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)  # Convert to grayscale
     blur = cv2.GaussianBlur(gray, (5, 5), 0)      # Light blur to reduce noise
     # Apply adaptive thresholding to create white background with black hand (no inversion)
-    thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, 
-                                  cv2.THRESH_BINARY, 11, 2)  # White background, black hand
+    thresh = cv2.adaptiveThreshold(blur, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
+                                   cv2.THRESH_BINARY, 11, 2)  # White background, black hand
     return thresh
+
 
 # Webcam loop
 while True:
     ret, frame = cap.read()
+
     if not ret:
         print("Error: Failed to capture frame.")
         break
@@ -128,17 +138,35 @@ while True:
     predicted_label = classes[predicted_class]
 
     # Display the prediction and instructions on the frame
-    cv2.putText(frame, f'Predicted: {predicted_label}', (10, 30), 
+    cv2.putText(frame, f'Predicted: {predicted_label}', (10, 30),
                 cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
-    cv2.putText(frame, "Place hand to fill green square completely", (10, 60), 
+    cv2.putText(frame, "Place hand to fill green square completely", (10, 60),
                 cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
     # Show the processed ROI for debugging
     cv2.imshow("Processed ROI", resized_roi)
+    # Preprocess the frame (resize to IMG_SIZE and normalize)
+    img = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert BGR to RGB
+    img = cv2.resize(img, (IMG_SIZE, IMG_SIZE))  # Resize image
+    img = np.expand_dims(img, axis=0)  # Add batch dimension
+    img = img / 255.0  # Normalize pixel values
+
+    # Predict the class of the image
+    prediction = model.predict(img)
+    predicted_class = np.argmax(prediction, axis=1)
+    predicted_label = classes[predicted_class[0]]  # Convert to class label
+
+    # Display the predicted letter on the frame
+    cv2.putText(frame, f'Predicted: {predicted_label}', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+    # Show the frame
     cv2.imshow("ASL Letter Detection", frame)
 
-    # Exit on 'q' key press
-    if cv2.waitKey(10) & 0xFF == ord('q'):
+    # # Exit on 'q' key press
+    # if cv2.waitKey(10) & 0xFF == ord('q'):
+
+    # Exit the loop when 'q' is pressed
+    if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 # Release resources
