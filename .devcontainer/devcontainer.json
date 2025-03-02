@@ -4,9 +4,7 @@
 	  "source=${localWorkspaceFolder},target=/workspace,type=bind"
 	],
 	"postCreateCommand": [
-	  "sudo apt update && sudo apt install -y libopencv-dev python3-pip",
-	  "pip3 install --upgrade pip",
-	  "pip3 install opencv-python tensorflow numpy"
+	  "/bin/bash -c 'sudo apt update && sudo apt install -y libopencv-dev python3-pip && pip3 install --upgrade pip && pip3 install opencv-python tensorflow numpy'"
 	],
 	"portsAttributes": {
 	  "3000": {
