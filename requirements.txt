@@ -1,4 +1,3 @@
-tensorflow
-numpy
-opencv-python
-scikit-learn
+groq
+streamlit
+python-dotenv
