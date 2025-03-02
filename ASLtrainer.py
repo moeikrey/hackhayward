@@ -1,4 +1,5 @@
 # This will train you how to make the sign language hands.
+# moeikrey 3/1/25
 import tensorflow as tf
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
@@ -101,6 +102,9 @@ prediction_start_time = None
 confirmation_time = 3  # seconds
 score = 0  # Initialize score
 
+# Load the sign chart image
+sign_chart = cv2.imread('signchart.jpg')
+
 # Webcam loop
 while True:
     ret, frame = cap.read()
@@ -176,6 +180,10 @@ while True:
     # Show the processed ROI for debugging
     cv2.imshow("Processed ROI", resized_roi)
     cv2.imshow("ASL Letter Detection", frame)
+
+    # Show the sign chart
+    if sign_chart is not None:
+        cv2.imshow("Sign Chart", sign_chart)
 
     # Exit on 'q' key press
     if cv2.waitKey(10) & 0xFF == ord('q'):
